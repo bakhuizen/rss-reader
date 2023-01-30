@@ -1,2 +1,2 @@
-# rss-reaser
+# rss-reader
 RSS reader
