@@ -6,21 +6,21 @@ const app = express();
 
 const rssFeedUrl = "https://www.svt.se/rss.xml";
 
-const parse = async url => {
+const parseAndTransform = async url => {
   const feed = await new RSSParser().parseURL(url);
 
-  console.log(feed.title);
-
-  feed.items.forEach(item => {
-    console.log(`${item.title} - ${item.link}\n${item.contentSnippet}\n\n`);
-  });
+  const transformedResponse = feed.items.map(item => ({title: item.title, contentSnippet: item.contentSnippet}));
+  return transformedResponse;
 }
 
 app.use(express.json())
 
 app.post("/api", (req, res) => {
-    parse(req.body.url);
-    res.json({ message: "This is your server speaking!" });
+  (async () => {
+    const list = await parseAndTransform(req.body.url)
+    res.json({ message: list });
+  })()
+    
   });
 
 app.listen(PORT, () => {
