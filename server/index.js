@@ -16,9 +16,10 @@ const parse = async url => {
   });
 }
 
-parse(rssFeedUrl);
+app.use(express.json())
 
-app.get("/api", (req, res) => {
+app.post("/api", (req, res) => {
+    parse(req.body.url);
     res.json({ message: "This is your server speaking!" });
   });
 

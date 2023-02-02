@@ -1,12 +1,19 @@
 import {useEffect, useState} from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   const [data, setData] = useState(null);
 
+  const requestData = { url: "https://www.svt.se/rss.xml" };
+
   useEffect(() => {
-    fetch("/api")
+    fetch("/api", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestData),
+    })
       .then((result) => result.json())
       .then((data) => setData(data.message));
   })
