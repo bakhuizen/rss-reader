@@ -10,6 +10,19 @@ function App() {
   https://www.dn.se/rss/
   */
 
+  const sortFrequencyMap = (wordFrequencyMap) => {
+    let sortable = [];
+    for (var key in wordFrequencyMap) {
+      sortable.push([key, wordFrequencyMap[key]]);
+    };
+
+    const sortedWordFrequencyMap = sortable.sort((a, b) => {
+        return b[1] - a[1];
+    });
+
+    return sortedWordFrequencyMap;
+  }
+
   const fetchRssfeed = (rssLink) => {
     fetch("/api/rss-feed/words", {
       method: 'POST',
@@ -18,9 +31,8 @@ function App() {
       },
       body: JSON.stringify({ url: rssLink }),
     }).then((result) => result.json())
-      .then((data) => setData(data.wordFrequencyMap));
+      .then((data) => setData(sortFrequencyMap(data.wordFrequencyMap)));  
   }
-
 
   return (
     <div className="App">
@@ -30,6 +42,7 @@ function App() {
             <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} />
             <button onClick={() => fetchRssfeed(url)}>Click here</button>
           </div>
+          {data && data[0][0]}
         </div>
       </header>
     </div>
