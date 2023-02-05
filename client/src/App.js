@@ -1,6 +1,8 @@
-import {useState} from 'react';
+import {Fragment, useState} from 'react';
 import './App.css';
-import { Wordcloud } from './Wordcloud/Wordcloud.js';
+import { Header } from './components/Header/Header.js';
+import { Footer } from './components/Footer/Footer.js';
+import { Wordcloud } from './components/Wordcloud/Wordcloud.js';
 import { sortFrequencyMap, fetchRssfeed } from './utils';
 
 function App() {
@@ -19,15 +21,15 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <div style={{display:'flex', flexDirection:'column', width:'100%'}}>
+        <Header/>
+        <Fragment>
           <div>
             <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} />
             <button onClick={() => handleClick()}>Click here</button>
           </div>
           {data && <Wordcloud words={data}/>}
-        </div>
-      </header>
+        </Fragment>
+        <Footer/>
     </div>
   );
 }
