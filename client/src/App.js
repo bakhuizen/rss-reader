@@ -7,7 +7,6 @@ import { sortFrequencyMap, fetchRssfeed } from './utils';
 
 function App() {
   const [data, setData] = useState(null);
-
   const [url, setUrl] = useState("https://www.svt.se/rss.xml");
   /*
   https://www.svt.se/rss.xml
@@ -25,7 +24,7 @@ function App() {
         <Fragment>
           <div>
             <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} />
-            <button onClick={() => handleClick()}>Click here</button>
+            <button onClick={() => handleClick()}>Generate word cloud</button>
           </div>
           {data && <Wordcloud words={data}/>}
         </Fragment>
