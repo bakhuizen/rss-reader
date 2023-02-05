@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div style={{display:'flex', flexDirection:'column'}}>
+        <div style={{display:'flex', flexDirection:'column', width:'100%'}}>
           <div>
             <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} />
             <button onClick={() => handleClick()}>Click here</button>
