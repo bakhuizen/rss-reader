@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import './App.css';
+import { Wordcloud } from './Wordcloud/Wordcloud.js';
 import { sortFrequencyMap, fetchRssfeed } from './utils';
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
             <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} />
             <button onClick={() => handleClick()}>Click here</button>
           </div>
-          {data && data[0][0]}
+          {data && <Wordcloud words={data}/>}
         </div>
       </header>
     </div>
