@@ -22,3 +22,13 @@ footer{
   font-size: calc(5px + 2vmin);
   margin-top: auto;
 }
+
+h6{
+  margin: 10px;
+}
+
+p{
+  font-size: 14px;
+  margin: 5px;
+}
+

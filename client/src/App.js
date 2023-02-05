@@ -1,31 +1,21 @@
 import {Fragment, useState} from 'react';
 import './App.css';
 import { Header } from './components/Header/Header.js';
-import { Footer } from './components/Footer/Footer.js';
+import { Form } from './components/Form/Form.js';
 import { Wordcloud } from './components/Wordcloud/Wordcloud.js';
-import { sortFrequencyMap, fetchRssfeed } from './utils';
+import { Footer } from './components/Footer/Footer.js';
 
 function App() {
   const [data, setData] = useState(null);
-  const [url, setUrl] = useState("https://www.svt.se/rss.xml");
-  /*
-  https://www.svt.se/rss.xml
-  https://www.dn.se/rss/
-  */
-
-  const handleClick = () => {
-    fetchRssfeed(url)
-    .then((data) => setData(sortFrequencyMap(data.wordFrequencyMap)));
+  const updateData = (data) => {
+    setData(data);
   }
 
   return (
     <div className="App">
         <Header/>
         <Fragment>
-          <div>
-            <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} />
-            <button onClick={() => handleClick()}>Generate word cloud</button>
-          </div>
+          <Form updateData={updateData}/>
           {data && <Wordcloud words={data}/>}
         </Fragment>
         <Footer/>

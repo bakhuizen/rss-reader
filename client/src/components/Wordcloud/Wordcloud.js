@@ -6,7 +6,7 @@ export const Wordcloud = (words) => {
         return '';
     }
 
-    const SCALE_FONT_SIZE_BY = 5;
+    const SCALE_FONT_SIZE_BY = 4;
     const hundredMostUsedWords = words.words.slice(0, 100);
 
     shuffleArray(hundredMostUsedWords);
