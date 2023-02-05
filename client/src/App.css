@@ -16,9 +16,6 @@ header{
 footer{
   background-color: black;
   padding: 10px;
-}
-
-footer{
   font-size: calc(5px + 2vmin);
   margin-top: auto;
 }
@@ -32,3 +29,7 @@ p{
   margin: 5px;
 }
 
+button{
+  background-color: darkolivegreen;
+  color: white;
+}

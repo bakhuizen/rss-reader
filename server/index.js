@@ -15,7 +15,6 @@ app.post("/api/rss-feed/words", (req, res) => {
       res.json({ wordFrequencyMap });
     }
     catch(e){
-      console.log("ERROOOR", e)
       res.statusCode = 404;
       res.json({error: "Invalid RSS link"})
     }
