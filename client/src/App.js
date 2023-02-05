@@ -11,7 +11,7 @@ function App() {
   */
 
   const fetchRssfeed = (rssLink) => {
-    fetch("/api", {
+    fetch("/api/rss-feed/words", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
