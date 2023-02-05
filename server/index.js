@@ -6,15 +6,15 @@ const app = express();
 
 app.use(express.json())
 
-const transformResponse = (data) => {
+const getWordFrequencyInRssFeed = (data) => {
   const initialValue = "";
   const allText = data.items.reduce(
     (accumulator, currentItem) => 
-      accumulator + " " + currentItem.title + " " + currentItem.contentSnippet,
+      accumulator + currentItem.title + " " + currentItem.contentSnippet + " ",
     initialValue
   );
 
-  const words = allText.toLowerCase().replace(/[^åäöáéa-z\s]/gi, ' ').split(/\s/);
+  const words = allText.toLowerCase().replace(/[^åäöáéa-z\s]/gi, ' ').split(/\s+/);
 
   const frequencyMap = {};
   words.forEach((word) => {
@@ -24,15 +24,14 @@ const transformResponse = (data) => {
     frequencyMap[word] += 1;
   })
 
-  console.log(frequencyMap);
+  return frequencyMap;
 }
 
 app.post("/api/rss-feed/words", (req, res) => {
   (async () => {
     const rssFeed = await new RSSParser().parseURL(req.body.url);
-    transformResponse(rssFeed);
-    const transformedResponse = rssFeed.items.map(item => ({title: item.title, contentSnippet: item.contentSnippet}));
-    res.json({ message: transformedResponse });
+    const wordFrequencyMap = getWordFrequencyInRssFeed(rssFeed);
+    res.json({ wordFrequencyMap });
   })()
     
   });

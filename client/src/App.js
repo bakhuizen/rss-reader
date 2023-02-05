@@ -18,7 +18,7 @@ function App() {
       },
       body: JSON.stringify({ url: rssLink }),
     }).then((result) => result.json())
-      .then((data) => setData(data.message[0].title));
+      .then((data) => setData(data.wordFrequencyMap));
   }
 
 
@@ -30,7 +30,6 @@ function App() {
             <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} />
             <button onClick={() => fetchRssfeed(url)}>Click here</button>
           </div>
-          {data}
         </div>
       </header>
     </div>
