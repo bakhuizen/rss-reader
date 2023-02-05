@@ -9,9 +9,17 @@ app.use(express.json())
 
 app.post("/api/rss-feed/words", (req, res) => {
   (async () => {
-    const rssFeed = await new RSSParser().parseURL(req.body.url);
-    const wordFrequencyMap = getWordFrequencyInRssFeed(rssFeed);
-    res.json({ wordFrequencyMap });
+    try{
+      const rssFeed = await new RSSParser().parseURL(req.body.url);
+      const wordFrequencyMap = getWordFrequencyInRssFeed(rssFeed);
+      res.json({ wordFrequencyMap });
+    }
+    catch(e){
+      console.log("ERROOOR", e)
+      res.statusCode = 404;
+      res.json({error: "Invalid RSS link"})
+    }
+    
   })()
     
   });
