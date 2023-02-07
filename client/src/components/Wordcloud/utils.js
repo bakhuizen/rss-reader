@@ -9,3 +9,8 @@ export const shuffleArray = (array) => {
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
+
+const stopWords = ["i", "på", "och", "har", "som", "den", "att", "från", "om", "det", "för", "detta", "inte"];
+export const filterStopWords = (words) => {
+    return words.filter(word => !stopWords.includes(word[0]));
+}
